@@ -24,3 +24,14 @@ func (db *DisplayBoard) ShowAvailableSpots() {
 	}
 	fmt.Printf("Total available spots in the parking lot: %d\n", totalAvailable)
 }
+
+func (db *DisplayBoard) DisplayAvailableSpots() {
+	for i, floor := range db.parkingLot.Floors {
+		fmt.Printf("Floor %d:\n", i)
+		for _, spot := range floor.Spots {
+			if !spot.IsOccupied {
+				fmt.Printf("Available %s spot\n", spot.SpotType)
+			}
+		}
+	}
+}

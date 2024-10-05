@@ -5,7 +5,6 @@ import (
 	"awesomeProject/display"
 	"awesomeProject/entities"
 	"awesomeProject/entryexit"
-	"awesomeProject/info"
 	"encoding/json"
 	"fmt"
 )
@@ -32,20 +31,18 @@ func main() {
 	fmt.Println("ss:", string(ss))
 
 	entryExit := entryexit.NewSimpleEntryExit(parkingLot)
-	infoPortal := info.NewCustomerInfoPortal(parkingLot)
-	displayBoard := display.NewDisplayBoard(parkingLot)
-
 	// Show initial available spots
+	displayBoard := display.NewDisplayBoard(parkingLot)
 	displayBoard.ShowAvailableSpots()
-	infoPortal.DisplayAvailableSpots()
+	displayBoard.DisplayAvailableSpots()
 
 	car := &entities.Car{}
 	ticket := entryExit.Enter(car)
 	if ticket != nil {
 		// Pay with cash
-		entryExit.Exit(ticket, &entities.Cash{})
+		//entryExit.Exit(ticket, &entities.Cash{})
 
 		// Or pay with a credit card
-		// entryExit.Exit(ticket, &entities.CreditCard{})
+		entryExit.Exit(ticket, &entities.CreditCard{})
 	}
 }
